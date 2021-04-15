@@ -1,0 +1,10 @@
+build mlForecastApp image:
+  stage: build
+  image: "registry.gitlab.com/gitlab-org/cluster-integration/auto-build-image/master:stable"
+  services:
+    - docker:stable-dind
+  variables:
+    TAG_NAME: "$CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA"
+  script:
+    - chmod +x ../scripts/build.sh
+    - ../scripts/build.sh
