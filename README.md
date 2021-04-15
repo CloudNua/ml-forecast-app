@@ -48,11 +48,15 @@ The [docker logic](./dockerfile) has been developed as follows:
 
 A [docker compose file](./docker-compose.yml) has been utilised for convenience of application loading
 
-The docker image can be build via the below command:
+To execute the build of the docker image build via the below command:
 
 ```bash
-docker build -t 'latest' .
+docker-compose build
 ```
+
+Expected Output:
+[![asciicast](https://asciinema.org/a/mdtuu4KAdscX88GRJLdFmEWi9.svg)](https://asciinema.org/a/mdtuu4KAdscX88GRJLdFmEWi9)
+
 
 ### Run docker image with port 8501 and volumes
 
@@ -64,14 +68,16 @@ docker run -it --rm --port '8501:8501' -v '$(pwd)/project:/usr/scr/app/project:d
 
 Start the Docker container in the background with docker-compose
 
+
 ```bash
 docker-compose up -d
 ```
+
 
 ### System Requirements
 From local testing, to successfully run this application the minimum spec is:
 
 - 3 vCPU
-- 8 GB RAM
+- 10 GB RAM
 
-This is primarily due to system requirements for running PyStan
+*** Note: This is primarily due to system requirements for running PyStan ***
