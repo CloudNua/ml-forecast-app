@@ -6,5 +6,5 @@ build mlForecastApp image:
   variables:
     TAG_NAME: "$CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA"
   script:
-    - chmod +x ../scripts/build.sh
-    - ../scripts/build.sh
+    - chmod +x ./scripts/build.sh
+    - ./scripts/build.sh
