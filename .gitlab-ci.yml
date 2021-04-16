@@ -1,7 +1,9 @@
 image: alpine:latest
 
 stages:
-  - build
+  - Static Analysis
+  - Test
+  - Build
 
 variables:
   # disable Docker TLS validation
