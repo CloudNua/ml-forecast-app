@@ -1,10 +1,9 @@
 image: alpine:latest
 
 stages:
-  - Build
   - Static Analysis
   - Test
-  - Release
+  - Build
 
 variables:
   # disable Docker TLS validation
@@ -13,4 +12,3 @@ variables:
 
 include:
   - local: /ci/build.gitlab-ci.yml
-  - local: /ci/test.gitlab-ci.yml
