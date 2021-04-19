@@ -1,6 +1,6 @@
 mypy:
   stage: Static Analysis
-  image: $CI_REGISTRY_IMAGE:latest
+  image: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
   before_script:
     - python --version
     - python -m pip install --upgrade pip
@@ -13,7 +13,7 @@ mypy:
 
 flake8:
   stage: Static Analysis
-  image: $CI_REGISTRY_IMAGE:latest
+  image: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
   before_script:
     - python --version
     - python -m pip install --upgrade pip
@@ -29,7 +29,7 @@ flake8:
 
 pylint:
   stage: Static Analysis
-  image: $CI_REGISTRY_IMAGE:latest
+  image: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
   allow_failure: true
   before_script:
     - python --version
@@ -42,7 +42,7 @@ pylint:
 
 unit_test_1:
   stage: Test
-  image: $CI_REGISTRY_IMAGE:latest
+  image: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
   before_script:
     - python --version
     - pip install pytest pytest-cov flake8 streamlit
@@ -57,7 +57,7 @@ unit_test_1:
 
 unit_test_2:
   stage: Test
-  image: $CI_REGISTRY_IMAGE:latest
+  image: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
   before_script:
     - python --version
     - pip install pytest pytest-cov flake8 streamlit
