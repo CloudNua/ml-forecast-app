@@ -24,6 +24,6 @@ docker build \
   --build-arg NO_PROXY="$NO_PROXY" \
   --build-arg no_proxy="$no_proxy" \
   $AUTO_DEVOPS_BUILD_IMAGE_EXTRA_ARGS \
-  --tag $TAG_NAME .
+  --tag $CONTAINER_TEST_IMAGE .
 
-docker push $TAG_NAME
+docker push $CONTAINER_TEST_IMAGE
