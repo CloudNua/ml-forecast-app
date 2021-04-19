@@ -1,6 +1,6 @@
 mypy:
   stage: Static Analysis
-  image: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
+  image: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:test
   allow_failure: true
   before_script:
     - python --version
@@ -12,7 +12,7 @@ mypy:
 
 flake8:
   stage: Static Analysis
-  image: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
+  image: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:test
   allow_failure: true
   before_script:
     - python --version
@@ -27,7 +27,7 @@ flake8:
 
 pylint:
   stage: Static Analysis
-  image: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
+  image: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:test
   allow_failure: true
   before_script:
     - python --version
@@ -39,7 +39,7 @@ pylint:
 
 unit_test_1:
   stage: Test
-  image: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
+  image: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:test
   allow_failure: true
   before_script:
     - python --version
@@ -55,7 +55,7 @@ unit_test_1:
 
 unit_test_2:
   stage: Test
-  image: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
+  image: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:test
   allow_failure: true
   before_script:
     - python --version
