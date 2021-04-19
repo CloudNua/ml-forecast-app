@@ -4,7 +4,7 @@ build_image:
   services:
     - docker:stable-dind
   variables:
-    CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
+    CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:test
   script:
     - chmod +x ./scripts/build.sh
     - ./scripts/build.sh
@@ -15,7 +15,7 @@ release_image:
   services:
     - docker:stable-dind
   variables:
-    CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
+    CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:test
     CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
   script:
     - chmod +x ./scripts/release.sh
