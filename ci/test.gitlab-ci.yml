@@ -1,11 +1,10 @@
 mypy:
   stage: Static Analysis
   image: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
+  allow_failure: true
   before_script:
     - python --version
-    - python -m pip install --upgrade pip
-    - pip install pytest pytest-cov flake8 streamlit
-    - if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - pip install mypy
   script:
     - python -m mypy src/main.py
   only:
@@ -14,11 +13,10 @@ mypy:
 flake8:
   stage: Static Analysis
   image: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
+  allow_failure: true
   before_script:
     - python --version
-    - python -m pip install --upgrade pip
-    - pip install pytest pytest-cov flake8 streamlit
-    - if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - pip install flake8
   script:
     # stop the build if there are Python syntax errors or undefined names
     - flake8 src/main.py --count --select=E9,F63,F7,F82 --show-source --statistics
@@ -32,9 +30,7 @@ pylint:
   image: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
   allow_failure: true
   before_script:
-    - python --version
-    - python -m pip install --upgrade pip
-    - pip install pytest pytest-cov flake8 streamlit
+    - pip install pytest
   script:
   - pylint src/*.py
   only:
@@ -43,9 +39,10 @@ pylint:
 unit_test_1:
   stage: Test
   image: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
+  allow_failure: true
   before_script:
     - python --version
-    - pip install pytest pytest-cov flake8 streamlit
+    - pip install pytest pytest-cov
   script:
   - pytest --cov=src/*.py tests/*.py
   - coverage xml
@@ -58,9 +55,10 @@ unit_test_1:
 unit_test_2:
   stage: Test
   image: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
+  allow_failure: true
   before_script:
     - python --version
-    - pip install pytest pytest-cov flake8 streamlit
+    - pip install pytest
   script:
   - pytest tests/*.py --junitxml=tests/junit_report.xml
   artifacts:
