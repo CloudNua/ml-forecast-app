@@ -1,44 +1,71 @@
-image: "python:3.8.9"
-
-before_script:
-  - python --version
-  - python -m pip install --upgrade pip
-  - pip install pytest pytest-cov flake8 streamlit
-  - if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
 mypy:
   stage: Static Analysis
+  image: $CI_REGISTRY_IMAGE:latest
+  before_script:
+    - python --version
+    - python -m pip install --upgrade pip
+    - pip install pytest pytest-cov flake8 streamlit
+    - if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
   script:
     - python -m mypy src/main.py
+  only:
+    - main
 
 flake8:
   stage: Static Analysis
+  image: $CI_REGISTRY_IMAGE:latest
+  before_script:
+    - python --version
+    - python -m pip install --upgrade pip
+    - pip install pytest pytest-cov flake8 streamlit
+    - if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
   script:
     # stop the build if there are Python syntax errors or undefined names
     - flake8 src/main.py --count --select=E9,F63,F7,F82 --show-source --statistics
     # exit-zero treats all errors as warnings. The GitHub/GitLab editor is 127 chars wide
     - flake8 src/main.py --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+  only:
+    - main
 
 pylint:
   stage: Static Analysis
+  image: $CI_REGISTRY_IMAGE:latest
   allow_failure: true
+  before_script:
+    - python --version
+    - python -m pip install --upgrade pip
+    - pip install pytest pytest-cov flake8 streamlit
   script:
   - pylint src/*.py
+  only:
+    - main
 
 unit_test_1:
   stage: Test
+  image: $CI_REGISTRY_IMAGE:latest
+  before_script:
+    - python --version
+    - pip install pytest pytest-cov flake8 streamlit
   script:
   - pytest --cov=src/*.py tests/*.py
   - coverage xml
   artifacts:
     reports:
       cobertura: coverage.xml
+  only:
+    - main
 
 unit_test_2:
   stage: Test
+  image: $CI_REGISTRY_IMAGE:latest
+  before_script:
+    - python --version
+    - pip install pytest pytest-cov flake8 streamlit
   script:
   - pytest tests/*.py --junitxml=tests/junit_report.xml
   artifacts:
     when: always
     reports:
       junit: junit_report.xml
+  only:
+    - main

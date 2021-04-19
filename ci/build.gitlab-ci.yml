@@ -4,7 +4,21 @@ build_image:
   services:
     - docker:stable-dind
   variables:
-    TAG_NAME: "$CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA"
+    CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
   script:
     - chmod +x ./scripts/build.sh
     - ./scripts/build.sh
+
+release_iamge:
+  stage: Release
+  image: "registry.gitlab.com/gitlab-org/cluster-integration/auto-build-image/master:stable"
+  services:
+    - docker:stable-dind
+  variables:
+    CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
+    CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
+  script:
+    - chmod +x ./scripts/build.sh
+    - ./scripts/build.sh
+  only:
+    - main
