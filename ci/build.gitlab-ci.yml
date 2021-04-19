@@ -16,7 +16,7 @@ release_image:
     - docker:stable-dind
   variables:
     CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:test
-    CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
+    CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG:latest
   script:
     - chmod +x ./scripts/release.sh
     - ./scripts/release.sh
