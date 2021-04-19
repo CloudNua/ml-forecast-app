@@ -9,7 +9,7 @@ build_image:
     - chmod +x ./scripts/build.sh
     - ./scripts/build.sh
 
-release_iamge:
+release_image:
   stage: Release
   image: "registry.gitlab.com/gitlab-org/cluster-integration/auto-build-image/master:stable"
   services:
@@ -18,7 +18,7 @@ release_iamge:
     CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
     CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
   script:
-    - chmod +x ./scripts/build.sh
-    - ./scripts/build.sh
+    - chmod +x ./scripts/release.sh
+    - ./scripts/release.sh
   only:
     - main
