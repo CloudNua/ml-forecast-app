@@ -30,9 +30,10 @@ pylint:
   image: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
   allow_failure: true
   before_script:
-    - pip install pytest
+    - python --version
+    - pip install pylint
   script:
-  - pylint src/*.py
+    - pylint src/*.py
   only:
     - main
 
@@ -42,9 +43,9 @@ unit_test_1:
   allow_failure: true
   before_script:
     - python --version
-    - pip install pytest pytest-cov
+    - pip install pytest pytest-cov coverage
   script:
-  - pytest --cov=src/*.py tests/*.py
+  - pytest --cov=src tests/
   - coverage xml
   artifacts:
     reports:
