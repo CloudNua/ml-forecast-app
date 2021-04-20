@@ -14,7 +14,7 @@ jobs:
     - name: Mirror + trigger CI
       uses: SvanBoxel/gitlab-mirror-and-ci-action@master
       with:
-        args: "https://gitlab.com/cloudnua-public/projects/ml-forecast-app"
+        args: "https://gitlab.com/cloudnua-public/gitops/apps/ml-forecast-app"
       env:
         GITLAB_HOSTNAME: "gitlab.com"
         GITLAB_USERNAME: "endakelly"
