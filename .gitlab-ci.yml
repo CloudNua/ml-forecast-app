@@ -1,16 +1,22 @@
 image: alpine:latest
 
-stages:
-  - Build
-  - Static Analysis
-  - Test
-  - Release
-
 variables:
-  # disable Docker TLS validation
-  DOCKER_TLS_CERTDIR: ""
   DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+  ROLLOUT_RESOURCE_TYPE: deployment
+
+stages:
+  - build
+  - static analysis
+  - test
+  - release
+  - staging
+  - production
 
 include:
-  - local: /ci/build.gitlab-ci.yml
-  - local: /ci/test.gitlab-ci.yml
+  - project: 'gitops-cloudnua/infra/templates'
+    ref: master
+    file:
+      - 'build.gitlab-ci.yml'
+      - 'test-py-2.gitlab-ci.yml'
+      - 'deploy.gitlab-ci.yml'

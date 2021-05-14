@@ -53,4 +53,5 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PATH="/opt/venv/bin:$PATH"
 
 # Run streamlit
-CMD ["streamlit run", "src/main.py"]
+EXPOSE 8501
+CMD streamlit run src/main.py
