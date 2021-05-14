@@ -14,8 +14,8 @@ stages:
   - production
 
 include:
-  - project: 'gitops-cloudnua/infra/templates'
-    ref: master
+  - project: 'cloudnua-public/gitops/infra/templates'
+    ref: main
     file:
       - 'build.gitlab-ci.yml'
       - 'test-py-2.gitlab-ci.yml'
